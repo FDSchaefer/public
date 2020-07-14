@@ -15,4 +15,4 @@ if inp == 'y' || inp == 'Y'
 end
 
 %Generaly Best between 20 -> 500
-RunSimulation(500,manual)
+RunSimulation(400,manual)
