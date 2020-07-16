@@ -7,6 +7,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 
 ## MatLab Projects
 1. [**Collision Simulation**](https://github.com/FDSchaefer/public/tree/master/MatLab%20Projects/TriangleCollision) This project involved the implementation of 2D collision mechanics for randomly placed moving ships. Using the main script one would be able to add or remove the number of ships, and take manual control over the frame updates. 
+
 ![Preview](https://github.com/FDSchaefer/public/blob/master/README/ColliderGif.gif?raw=true)
 
 
