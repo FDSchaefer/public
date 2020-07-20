@@ -1,14 +1,12 @@
 
-#from vpython import curve
-#from vpython import vector
-#from vpython import color
-#from vpython import curve
 from vpython import *
+import wx
 import numpy as np
 from random import randrange
 
+
 class Boids:
-    def __init__(self, numboids = 150, sidesize = 50.0):     #class constructor with default parameters filled
+    def __init__(self, numboids = 100, sidesize = 50.0):     #class constructor with default parameters filled
         #class constants 
         #display(title = "Boids v1.0")   #put a title in the display window
 
@@ -18,35 +16,123 @@ class Boids:
         """
         torus:  donut shaped space, i.e. infinite
         effect: boids flying out of bounds appear at the opposite side
-        note:   cartesian matrices don't handle toruses very well, but I couldn't
-                figure out a better way to keep the flock in view.
         """
+
+        #Controls
+        self.running    = True
+        self.FOC        = True
+        self.AVD        = True
+        self.MVE        = True
+
         self.MIN = self.SIDE * -1.0    #left
         self.MAX = self.SIDE           #right
         
         self.RADIUS = 1                 #radius of a boid.  I wimped and used spheres.
+        self.length = 3
+
+
         self.NEARBY = self.RADIUS * 10  #the view of space around each boid
         self.viewAngle = 0.6
-        self.FlockFACTOR = 0.01
+        self.FlockFACTOR = 0.04
         self.velMatchFactor = 0.2
         self.avoidanceFactor = 0.5
-        #self.NEGFACTOR = self.FACTOR * -1.0 #same thing, only negative
         
+
         self.NUMBOIDS = numboids        #the number of boids in the flock
         self.View     = 5               #View Range of Boids
         self.boidflock = []             #empty list of boids
         self.boidvelo = []              #empty list of boids Velocity
         self.BoidSpeed = 0.5
 
+
         self.boids()                    #okay, now that all the constants have initialized, let's fly!
 
     def boids(self):
+        self.createUI()
         self.initializePositions()      #create a space with boids
-        while (1==1):                   #loop forever
+        while (True):                   #loop forever
             rate(100)                    #controls the animation speed, bigger = faster
-            self.moveAllBoidsToNewPositions()   #um ... what it says
+            if self.running:
+                self.moveAllBoidsToNewPositions()   #um ... what it says
+         
+    def createUI(self):
+        
+        scene.width = 500
+        scene.height = 500
+        scene.range = self.MAX*2
+        scene.title = "Boid Flocking Behaviour\n"
+        
+
+        def Run(b): 
+            self.running = not self.running
+            if self.running: b.text = "Pause"
+            else: b.text = "Run"
+        button(text="Pause", pos=scene.title_anchor, bind=Run)
+
+        def RunNUM(m):
+            self.running = False
+            import time
+            time.sleep(0.5)
+
+            for b in range(self.NUMBOIDS):
+                self.boidflock[b].visible = False
+            self.NUMBOIDS = int(m.selected)
+            self.initializePositions()
+
+            self.running = True
+
+        wtext(text='Number Of Boids: ')
+        menu(choices=['50', '100', '150', '200', '250', '300'], index=1, bind=RunNUM)
+        wtext(text='\n')
+
+        def FOC():
+            self.FOC = not self.FOC
             
+        def AVD():
+            self.AVD = not self.AVD
+
+        def MVE():
+            self.MVE = not self.MVE
+
+        def setFOC(s):
+            wt1.text = '{:1.2f}  '.format(s.value)
+            self.FlockFACTOR = 0.04*s.value
+
+        def setAVD(s):
+            wt2.text = '{:1.2f}  '.format(s.value)
+            self.avoidanceFactor = 0.2*s.value
+
+        def setMVE(s):
+            wt3.text = '{:1.2f}  '.format(s.value)
+            self.velMatchFactor = 0.5*s.value
+        
+        s1 = slider(min=0.1, max=3, value=1, length=150, bind=setFOC, right=15,style=wx.SL_HORIZONTAL)
+        wtext(text='x')
+        wt1 = wtext(text='{:1.2f}  '.format(s1.value))
+        r1 = radio(bind=FOC, checked=True, text='Flock To Centre\n\n')
+        
+        s2 = slider(min=0.1, max=3, value=1, length=150, bind=setAVD, right=15,style=wx.SL_HORIZONTAL)
+        wtext(text='x')
+        wt2 = wtext(text='{:1.2f}  '.format(s2.value))
+        r2 = radio(bind=AVD, checked=True, text='Avoidance\n\n')
+        
+        s3 = slider(min=0.1, max=3, value=1, length=150, bind=setMVE, right=15,style=wx.SL_HORIZONTAL)
+        wtext(text='x')
+        wt3 = wtext(text='{:1.2f}  '.format(s3.value))
+        r3 = radio(bind=MVE, checked=True, text='Match Velocitys\n\n')
+
+        def Default():
+            s1.value= 1
+            s1.bind(s1)
+            s2.value= 1
+            s2.bind(s2)
+            s3.value= 1
+            s3.bind(s3)
+
+        button(text="Reset Defaults", bind=Default)
+        
     def initializePositions(self):
+
         #wire frame of space (Not Worth Looping for ease of reading)
         backBottom      = curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MAX, self.MIN, self.MIN)], color=color.white)
         backTop         = curve(pos=[(self.MIN, self.MAX, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
@@ -60,6 +146,9 @@ class Boids:
         backRight       = curve(pos=[(self.MAX, self.MIN, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
         frontLeft       = curve(pos=[(self.MIN, self.MIN, self.MAX), (self.MIN, self.MAX, self.MAX)], color=color.white)
         frontRight      = curve(pos=[(self.MAX, self.MIN, self.MAX), (self.MAX, self.MAX, self.MAX)], color=color.white)
+        
+        self.boidflock = []             #empty list of boids
+        self.boidvelo = []              #empty list of boids Velocity
 
         #Place Boids Randomly and add velocity
         for b in range(self.NUMBOIDS):       
@@ -68,11 +157,11 @@ class Boids:
             y = randrange(self.MIN, self.MAX) 
             z = randrange(self.MIN, self.MAX) 
 
-            self.boidflock.append(sphere(pos = vector(x,y,z), radius=self.RADIUS, color=color.yellow))
-
             #Create velocity at max 1 magnitude
             self.boidvelo.append(vector.random())
 
+            self.boidflock.append(cone(pos = vector(x,y,z), axis=self.boidvelo[b]*self.length, radius=self.RADIUS,  color=color.yellow))
+            
     def moveAllBoidsToNewPositions(self):
 
         for b in range(self.NUMBOIDS):
@@ -87,17 +176,15 @@ class Boids:
             v2 = vector(0.0,0.0,0.0)        #initialize vector for rule 2
             v3 = vector(0.0,0.0,0.0)        #initialize vector for rule 3
 
-            v1 = self.rule1(b,Vlist)              #get the vector for rule 1
-            v2 = self.rule2(b,Vlist)              #get the vector for rule 2
-            v3 = self.rule3(b,Vlist)              #get the vector for rule 3
+            v1 = self.rule1(b,Vlist)*self.FOC              #get the vector for rule 1
+            v2 = self.rule2(b,Vlist)*self.AVD                #get the vector for rule 2
+            v3 = self.rule3(b,Vlist)*self.MVE              #get the vector for rule 3
 
             boidvelocity = self.boidvelo[b]
             boidvelocity = hat(boidvelocity + v1 + v2 + v3)  #accumulate the rules vector results
             self.boidflock[b].pos = self.boidflock[b].pos + (boidvelocity*self.BoidSpeed) #move the boid
             self.boidvelo[b]    = boidvelocity #Update Vel list
-
-
-            
+            self.boidflock[b].axis = self.boidvelo[b]*self.length
 
     def actionRadius(self,bSel):
         ViewList = []
