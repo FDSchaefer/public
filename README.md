@@ -13,9 +13,9 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 
 
 ## Python Projects
-Too Be added Soon
+1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)
 
-
+![Preview](https://github.com/FDSchaefer/public/blob/master/README/BoidGif.gif)
 
 
 ## Unity (C#)
