@@ -1,68 +1,65 @@
+"""
+Rights: Franz D Schaefer
+https://github.com/FDSchaefer/public
+Please Give Credit if used
 
-from vpython import *
+Boid Flocking Sim, based on Vpython & WxPython. 
+Includes UI for pausing, number of Boids and movement factors. 
+"""
+
+#Import Librarys
 import wx
+from vpython import *
 import numpy as np
 from random import randrange
 
 
 class Boids:
-    def __init__(self, numboids = 100, sidesize = 50.0):     #class constructor with default parameters filled
+    def __init__(self, numboids = 100, sidesize = 50.0):
+        
         #class constants 
-        #display(title = "Boids v1.0")   #put a title in the display window
+        self.SIDE               = sidesize
+        self.MIN                = self.SIDE * -1.0
+        self.MAX                = self.SIDE
+        self.NUMBOIDS           = numboids
 
-        self.SIDE = sidesize            #unit for a side of the flight space
+        #UI Controls
+        self.running            = True
+        self.FOC                = True
+        self.AVD                = True
+        self.MVE                = True
 
-        #the next six lines define the boundaries of the torus
-        """
-        torus:  donut shaped space, i.e. infinite
-        effect: boids flying out of bounds appear at the opposite side
-        """
+        #Boid Features 
+        self.RADIUS             = 1
+        self.length             = 3
+        self.BoidSpeed          = 0.5
 
-        #Controls
-        self.running    = True
-        self.FOC        = True
-        self.AVD        = True
-        self.MVE        = True
-
-        self.MIN = self.SIDE * -1.0    #left
-        self.MAX = self.SIDE           #right
+        #Factors For Calculation
+        self.NEARBY             = self.RADIUS * 10
+        self.viewAngle          = 0.6
+        self.FlockFACTOR        = 0.04
+        self.velMatchFactor     = 0.2
+        self.avoidanceFactor    = 0.5
         
-        self.RADIUS = 1                 #radius of a boid.  I wimped and used spheres.
-        self.length = 3
-
-
-        self.NEARBY = self.RADIUS * 10  #the view of space around each boid
-        self.viewAngle = 0.6
-        self.FlockFACTOR = 0.04
-        self.velMatchFactor = 0.2
-        self.avoidanceFactor = 0.5
-        
-
-        self.NUMBOIDS = numboids        #the number of boids in the flock
-        self.View     = 5               #View Range of Boids
-        self.boidflock = []             #empty list of boids
-        self.boidvelo = []              #empty list of boids Velocity
-        self.BoidSpeed = 0.5
-
-
-        self.boids()                    #okay, now that all the constants have initialized, let's fly!
+        #Define Main
+        self.boids()
 
     def boids(self):
-        self.createUI()
-        self.initializePositions()      #create a space with boids
-        while (True):                   #loop forever
-            rate(100)                    #controls the animation speed, bigger = faster
-            if self.running:
-                self.moveAllBoidsToNewPositions()   #um ... what it says
-         
+        self.createUI()                 #Create The UI
+        self.initializePositions()      #Create The Animation
+        while (True):                   #Loop Forever 
+            rate(100)                   #Rate Of Updates
+            if self.running:            #If Active run The simulation Tick               
+                self.moveAllBoidsToNewPositions()
     def createUI(self):
         
+        ## INIT GUI
         scene.width = 500
         scene.height = 500
-        scene.range = self.MAX*2
+        scene.range = self.MAX*2        #Set the Zoom of the Scene
         scene.title = "Boid Flocking Behaviour\n"
         
-
+        ## Pause And Number UI
         def Run(b): 
             self.running = not self.running
             if self.running: b.text = "Pause"
@@ -72,39 +69,34 @@ class Boids:
         def RunNUM(m):
             self.running = False
             import time
-            time.sleep(0.5)
+            time.sleep(0.5) #Allow current Tick to finish
 
             for b in range(self.NUMBOIDS):
-                self.boidflock[b].visible = False
+                self.boidflock[b].visible = False   #Remove the Boids from simulation
             self.NUMBOIDS = int(m.selected)
-            self.initializePositions()
+            self.initializePositions()              #Run Creation function again with new Number
 
             self.running = True
-
         wtext(text='Number Of Boids: ')
         menu(choices=['50', '100', '150', '200', '250', '300'], index=1, bind=RunNUM)
         wtext(text='\n')
 
+        ## Create Factor UI
         def FOC():
             self.FOC = not self.FOC
-            
         def AVD():
             self.AVD = not self.AVD
-
         def MVE():
             self.MVE = not self.MVE
-
         def setFOC(s):
             wt1.text = '{:1.2f}  '.format(s.value)
-            self.FlockFACTOR = 0.04*s.value
-
+            self.FlockFACTOR = 0.04*s.value**2
         def setAVD(s):
             wt2.text = '{:1.2f}  '.format(s.value)
-            self.avoidanceFactor = 0.2*s.value
-
+            self.avoidanceFactor = 0.2*s.value**2
         def setMVE(s):
             wt3.text = '{:1.2f}  '.format(s.value)
-            self.velMatchFactor = 0.5*s.value
+            self.velMatchFactor = 0.5*s.value**2
         
         s1 = slider(min=0.1, max=3, value=1, length=150, bind=setFOC, right=15,style=wx.SL_HORIZONTAL)
         wtext(text='x')
@@ -121,6 +113,7 @@ class Boids:
         wt3 = wtext(text='{:1.2f}  '.format(s3.value))
         r3 = radio(bind=MVE, checked=True, text='Match Velocitys\n\n')
 
+        #Create Default Button
         def Default():
             s1.value= 1
             s1.bind(s1)
@@ -128,24 +121,23 @@ class Boids:
             s2.bind(s2)
             s3.value= 1
             s3.bind(s3)
-
         button(text="Reset Defaults", bind=Default)
         
     def initializePositions(self):
 
         #wire frame of space (Not Worth Looping for ease of reading)
-        backBottom      = curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MAX, self.MIN, self.MIN)], color=color.white)
-        backTop         = curve(pos=[(self.MIN, self.MAX, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
-        frontBottom     = curve(pos=[(self.MIN, self.MIN, self.MAX), (self.MAX, self.MIN, self.MAX)], color=color.white)
-        frontTop        = curve(pos=[(self.MIN, self.MAX, self.MAX), (self.MAX, self.MAX, self.MAX)], color=color.white)
-        leftBottom      = curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MIN, self.MIN, self.MAX)], color=color.white)
-        leftTop         = curve(pos=[(self.MIN, self.MAX, self.MIN), (self.MIN, self.MAX, self.MAX)], color=color.white)
-        rightBottom     = curve(pos=[(self.MAX, self.MIN, self.MIN), (self.MAX, self.MIN, self.MAX)], color=color.white)
-        rightTop        = curve(pos=[(self.MAX, self.MAX, self.MIN), (self.MAX, self.MAX, self.MAX)], color=color.white)
-        backLeft        = curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MIN, self.MAX, self.MIN)], color=color.white)
-        backRight       = curve(pos=[(self.MAX, self.MIN, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
-        frontLeft       = curve(pos=[(self.MIN, self.MIN, self.MAX), (self.MIN, self.MAX, self.MAX)], color=color.white)
-        frontRight      = curve(pos=[(self.MAX, self.MIN, self.MAX), (self.MAX, self.MAX, self.MAX)], color=color.white)
+        curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MAX, self.MIN, self.MIN)], color=color.white)
+        curve(pos=[(self.MIN, self.MAX, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
+        curve(pos=[(self.MIN, self.MIN, self.MAX), (self.MAX, self.MIN, self.MAX)], color=color.white)
+        curve(pos=[(self.MIN, self.MAX, self.MAX), (self.MAX, self.MAX, self.MAX)], color=color.white)
+        curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MIN, self.MIN, self.MAX)], color=color.white)
+        curve(pos=[(self.MIN, self.MAX, self.MIN), (self.MIN, self.MAX, self.MAX)], color=color.white)
+        curve(pos=[(self.MAX, self.MIN, self.MIN), (self.MAX, self.MIN, self.MAX)], color=color.white)
+        curve(pos=[(self.MAX, self.MAX, self.MIN), (self.MAX, self.MAX, self.MAX)], color=color.white)
+        curve(pos=[(self.MIN, self.MIN, self.MIN), (self.MIN, self.MAX, self.MIN)], color=color.white)
+        curve(pos=[(self.MAX, self.MIN, self.MIN), (self.MAX, self.MAX, self.MIN)], color=color.white)
+        curve(pos=[(self.MIN, self.MIN, self.MAX), (self.MIN, self.MAX, self.MAX)], color=color.white)
+        curve(pos=[(self.MAX, self.MIN, self.MAX), (self.MAX, self.MAX, self.MAX)], color=color.white)
         
         self.boidflock = []             #empty list of boids
         self.boidvelo = []              #empty list of boids Velocity
@@ -165,40 +157,44 @@ class Boids:
     def moveAllBoidsToNewPositions(self):
 
         for b in range(self.NUMBOIDS):
+            #Check the Boundary Condition
+            self.boundRule(b)                          
 
-            self.boundRule(b)                           #Check the Boundary Condition
-
-            #Aquire the boids which are within the 'visual' range. 
+            #Aquire the boids which are within the 'visual' range.
             Vlist = self.actionRadius(b)
-            #print(Vlist)
 
+            #Aquire Vector Factors          
             v1 = vector(0.0,0.0,0.0)        #initialize vector for rule 1
             v2 = vector(0.0,0.0,0.0)        #initialize vector for rule 2
             v3 = vector(0.0,0.0,0.0)        #initialize vector for rule 3
+            
+            v1 = self.rule1(b,Vlist)*self.FOC       #get the vector for rule 1
+            v2 = self.rule2(b,Vlist)*self.AVD       #get the vector for rule 2
+            v3 = self.rule3(b,Vlist)*self.MVE       #get the vector for rule 3
 
-            v1 = self.rule1(b,Vlist)*self.FOC              #get the vector for rule 1
-            v2 = self.rule2(b,Vlist)*self.AVD                #get the vector for rule 2
-            v3 = self.rule3(b,Vlist)*self.MVE              #get the vector for rule 3
-
-            boidvelocity = self.boidvelo[b]
-            boidvelocity = hat(boidvelocity + v1 + v2 + v3)  #accumulate the rules vector results
-            self.boidflock[b].pos = self.boidflock[b].pos + (boidvelocity*self.BoidSpeed) #move the boid
-            self.boidvelo[b]    = boidvelocity #Update Vel list
-            self.boidflock[b].axis = self.boidvelo[b]*self.length
+            #Apply Changes
+            boidvelocity            = self.boidvelo[b]                                          #Get the previous Velocity
+            boidvelocity            = hat(boidvelocity + v1 + v2 + v3)                          #accumulate the rules vector results
+            self.boidflock[b].pos   = self.boidflock[b].pos + (boidvelocity*self.BoidSpeed)     #move the boid
+            self.boidvelo[b]        = boidvelocity                                              #Update Vel list
+            self.boidflock[b].axis  = self.boidvelo[b]*self.length                              #Update Boid Orientation
 
     def actionRadius(self,bSel):
         ViewList = []
-        for b in range(self.NUMBOIDS):              #for all the boids
+        for b in range(self.NUMBOIDS):
             if b != bSel:
-                differenceVec = self.boidflock[bSel].pos - self.boidflock[b].pos
-                if mag(differenceVec) <= self.NEARBY: #Check if close enough
-                    #Now check if angle is in direction of flight/view
-                    if diff_angle(self.boidvelo[bSel],differenceVec) <= 3.142*self.viewAngle:
+                DifVec     = self.boidflock[bSel].pos - self.boidflock[b].pos
+                #Check if Close enough and within the angle of view
+                if mag(DifVec) <= self.NEARBY:
+                    #Split them to avoid extra calculations if possible
+                    AngleOfBoid     = diff_angle(self.boidvelo[bSel],DifVec)
+                    if AngleOfBoid <= 3.14*self.viewAngle:
                         ViewList.append(b)
         return ViewList
 
     def boundRule(self,b):
         #manage boids hitting the boundaries
+        #Not Very efficent but handles it ok.
         if self.boidflock[b].pos.x < self.MIN:
             self.boidflock[b].pos.x = self.MAX
                 
@@ -219,47 +215,41 @@ class Boids:
         return(self)
                 
     def rule1(self, aboid, Vlist):    #Rule 1:  boids fly to perceived flock center
-        pfc = vector(0.0,0.0,0.0)                   #pfc: perceived flock center
+        v = vector(0.0,0.0,0.0)
         Vlist.append(aboid)
-        for b in Vlist:              #for all the boids
-            pfc = pfc + self.boidflock[b].pos  #calculate the total pfc
-        pfc = pfc/(len(Vlist)+1)           #average the pfc
+        for b in Vlist:
+            v = v + self.boidflock[b].pos                               #calculate the total vector
+        v = v/(len(Vlist)+1)                                            #average the vector
 
-
-        pfcOut = (hat(pfc - self.boidflock[aboid].pos))*self.FlockFACTOR
-
-
-        return pfcOut 
+        vOut = (hat(v - self.boidflock[aboid].pos))*self.FlockFACTOR    #Clac Final Flock Vector
+        return vOut 
 
     def rule2(self, aboid,Vlist):    #Rule 2: boids avoid other boids
-        MeanClose = vector(0,0,0)
+        v = vector(0,0,0)
         c = 0
-
-        #Find closet boid
-        for b in Vlist:              #for all the boids
-            if mag(self.boidflock[b].pos-self.boidflock[aboid].pos) < self.NEARBY/2:
-                MeanClose = MeanClose + self.boidflock[b].pos
+        for b in Vlist:
+            if mag(self.boidflock[b].pos-self.boidflock[aboid].pos) < self.NEARBY/2:    #If too Close
+                v = v + self.boidflock[b].pos
                 c += 1
         if c != 0:
-            MeanClose = MeanClose/c
+            v = v/c
 
-        vout = hat(MeanClose - self.boidflock[aboid].pos)*-self.avoidanceFactor
-
+        vout = hat(v - self.boidflock[aboid].pos)*-self.avoidanceFactor                 #Create Avoidance Vector
         return vout
         
     def rule3(self, aboid, Vlist):    #Rule 3: boids try to match speed of flock
-        pfv = vector(0.0,0.0,0.0)                   #pfc: perceived flock velocity
+        v = vector(0.0,0.0,0.0)
         Vlist.append(aboid)
-        for b in Vlist:              #for all the boids
-            pfv = pfv + self.boidvelo[b]  #calculate the total pfc
-        pfv = pfv/(len(Vlist)+1)           #average the pfc
-        pfv = hat(pfv) * self.velMatchFactor
+        for b in Vlist:
+            v = v + self.boidvelo[b]
+        v = v/(len(Vlist)+1)
+        vOut = hat(v) * self.velMatchFactor     #Create Flock Vector
 
-        return pfv
+        return vOut
 
 
 if __name__ == "__main__":
-    b = Boids()     #instantiate the Boids class, the class constructor takes care of the rest.
+    b = Boids()     #Init the Boids class
 
 
 
