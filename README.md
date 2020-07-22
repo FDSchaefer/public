@@ -13,7 +13,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 
 
 ## Python Projects
-1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)
+1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim) This project involved the implementation of a simple Boid Flocking simulation, using the 3 laws. Additional GUI additions were added to allow the user to play around with the simulation, including sliders, buttons and menus for all relevent options. 
 
 ![Preview](https://github.com/FDSchaefer/public/blob/master/README/BoidGif.gif)
 
