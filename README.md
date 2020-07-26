@@ -9,7 +9,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 1. **MetaData Treatment Planning** 
 <details>
   <summary>Details</summary>
-  This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software [MatRad](https://github.com/e0404/matRad). The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
+  This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
   *Link to Abstract*
 </details>
   
@@ -20,16 +20,6 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   The concept behind this project is to implement a OCR for the purposes of reading pictures of reciepts, and extracting the name and price of each item. This would then be tabulated and the items placed into catagories. Giving the user an overview of where and how money is being spent, which items are candidates for bulk buying, etc. Idealy this project would be integrated into an app in a later development stage. 
   
 </details>  
-  
-## MatLab Mini Projects
-1. [**Collision Simulation**](https://github.com/FDSchaefer/public/tree/master/MatLab%20Projects/TriangleCollision)
-<details>
-  <summary>Details</summary>
-  This project involved the implementation of 2D collision mechanics for randomly placed moving ships. Using the main script one would be able to add or remove the number of ships, and take manual control over the frame updates. 
-  
-  ![Preview](https://github.com/FDSchaefer/public/blob/master/README/ColliderGif.gif?raw=true)
-  
-</details>
 
 
 ## Python Mini Projects
@@ -41,6 +31,23 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   ![Preview](https://github.com/FDSchaefer/public/blob/master/README/BoidGif.gif)  
   
 </details>
+
+2. **Dynamic Textures, Via Random Noise**
+<details>
+  <summary>Details</summary>
+  
+</details>
+  
+## MatLab Mini Projects
+1. [**Collision Simulation**](https://github.com/FDSchaefer/public/tree/master/MatLab%20Projects/TriangleCollision)
+<details>
+  <summary>Details</summary>
+  This project involved the implementation of 2D collision mechanics for randomly placed moving ships. Using the main script one would be able to add or remove the number of ships, and take manual control over the frame updates. 
+  
+  ![Preview](https://github.com/FDSchaefer/public/blob/master/README/ColliderGif.gif?raw=true)
+  
+</details>
+
 
 ## Unity (C#)
 Too Be added Soon
