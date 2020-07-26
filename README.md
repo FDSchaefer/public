@@ -4,13 +4,22 @@ All projects are organised by language, then in individual project folders (If U
 Sneak Peeks will be shown here, with relevent information/visuals.
 
 (Please note this repo is a recent creation & I still need to clear publication/NDA agreements for larger projects)
+
 ## Deep Learning Projects  
 1. **MetaData Treatment Planning** 
 <details>
   <summary>Details</summary>
-  This Project involved the creation 
-  
+  This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software [MatRad](https://github.com/e0404/matRad). The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
+  *Link to Abstract*
 </details>
+  
+2. **Receipt Scanner and Expense Organiser(OCR)** 
+<details>
+  <summary>Details</summary>
+  **IN PROGRESS**
+  The concept behind this project is to implement a OCR for the purposes of reading pictures of reciepts, and extracting the name and price of each item. This would then be tabulated and the items placed into catagories. Giving the user an overview of where and how money is being spent, which items are candidates for bulk buying, etc. Idealy this project would be integrated into an app in a later development stage. 
+  
+</details>  
   
 ## MatLab Mini Projects
 1. [**Collision Simulation**](https://github.com/FDSchaefer/public/tree/master/MatLab%20Projects/TriangleCollision)
