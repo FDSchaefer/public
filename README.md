@@ -35,7 +35,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 2. **Dynamic Textures, Via Random Noise**
 <details>
   <summary>Details</summary>
-  
+  This project worked on creating dynamic textures via random noise, by layering differnet noise dencities in differnt ways, to allow for a fast yet always unique experience. Works well as a screensaver/background or animated poster. 
 </details>
   
 ## MatLab Mini Projects
