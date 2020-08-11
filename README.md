@@ -32,10 +32,13 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
 </details>
 
-2. **Dynamic Textures, Via Random Noise**
+2. [**Dynamic Textures, Via Random Noise**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/DynamicNoise)
 <details>
   <summary>Details</summary>
   This project worked on creating dynamic textures via random noise, by layering differnet noise dencities in differnt ways, to allow for a fast yet always unique experience. Works well as a screensaver/background or animated poster. 
+  
+  ![Preview](https://github.com/FDSchaefer/public/blob/master/README/Noise.gif)  
+  
 </details>
   
 ## MatLab Mini Projects
