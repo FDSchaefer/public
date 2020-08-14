@@ -3,8 +3,10 @@ Rights: Franz D Schaefer
 https://github.com/FDSchaefer/public
 Please Give Credit if used
 
-.
-.
+This project worked on creating dynamic textures via random noise, 
+by layering differnet noise dencities in differnt ways, 
+to allow for a fast yet always unique experience.
+Works well as a screensaver/background or animated poster.
 .
 """
 
