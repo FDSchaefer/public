@@ -20,10 +20,9 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
 </details>   
  
-3. **Receipt Scanner and Expense Organiser(OCR)** 
+3. **Receipt Scanner and Expense Organiser(OCR)** **IN PROGRESS**
 <details>
   <summary>Details</summary>
-  **IN PROGRESS**
   The concept behind this project is to implement a OCR for the purposes of reading pictures of reciepts, and extracting the name and price of each item. This would then be tabulated and the items placed into catagories. Giving the user an overview of where and how money is being spent, which items are candidates for bulk buying, etc. Idealy this project would be integrated into an app in a later development stage. 
   
 </details>  
