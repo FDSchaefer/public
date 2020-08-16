@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 """
 Created on Thu Aug 13 18:41:32 2020
 
@@ -268,4 +267,40 @@ for epoch in range(num_epochs):
             torch.save(model.state_dict(), SaveDir + NAME +'//Best.pth')
 
 
+if SAVE == 'Y' or SAVE == 'y':
+    #SAVE ALL TRAINING DATA/SETS for Future Display
+    torch.save(model, SaveDir + NAME +'\ModelSave.npy')
+
+
+
+np.save(SaveDir + NAME +'/TrainingHistory', [LTmean1, LTstd1, LTmean2, LTstd2, LVmean1, LVstd1, LVmean2, LVstd2])
+
+### Create Encoded Data && DeEncoded Data
+
+model = model.load_state_dict(torch.load(SaveDir + NAME +'//Best.pth'))
+
+Original, Encoded, Decoded = [], [], []
+for i in range (0,len(dataSet)):
+    input = dataSet[i:i+1]
+
+    Original    .append(                    input.cpu().detach().numpy()[0,0])
+    Encoded     .append(    model.encoder(  input).cpu().detach().numpy()[0])
+    Decoded     .append(    model(          input).cpu().detach().numpy()[0,0])
+
+
+##CLEAR UP MEMORY FOR SAVING 
+del model
+del imageList
+del dataSet
+
+np.save(SaveDir + NAME +'/PostModelImages', [Original, Encoded, Decoded])
+
+
+from ScrollView import Scroller
+
+Scroller(Original[10])
+Scroller(Encoded[10][0])
+Scroller(Decoded[10])
+
+#np.load('PATH',mmap_mode=None, allow_pickle = True)
 print('debug')
