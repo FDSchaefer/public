@@ -1,0 +1,4 @@
+
+*.mha
+Deep Learning/BRAIN MRI/models/
+Deep Learning/BRAIN MRI/processed/standardData.npy
