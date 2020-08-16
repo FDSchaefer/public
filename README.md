@@ -6,7 +6,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 (Please note this repo is a recent creation & I still need to clear publication/NDA agreements for larger projects)
 
 ## Deep Learning Projects  
-1. **MetaData Treatment Planning** 
+1. **MetaData Based Treatment Planning Thesis (Fully Connected Neural Network & Autoencoders)** 
 <details>
   <summary>Details</summary>
   This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
