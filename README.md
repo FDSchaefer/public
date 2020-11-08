@@ -11,9 +11,9 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   <summary>Details</summary>
   This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
   
-  **NOTE: CANNOT BE PUBLISHED HERE UNTILL SUBMISSION SEP 2020**
+  **NOTE: Currently being refined for publication, therefore will not be uploaded until then**
   
-  ~Link to Abstract~
+  [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
 </details>
  
 2. [**Brain MRI: 3D Convolutional AutoEncoder & Patient Age Classifier**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (75%)
