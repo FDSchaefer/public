@@ -2,3 +2,7 @@
 *.mha
 Deep Learning/BRAIN MRI/models/
 Deep Learning/BRAIN MRI/processed/standardData.npy
+*.png
+*.h5
+*.jp2
+Deep Learning/ClassSat/metadata.csv
