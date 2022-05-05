@@ -6,17 +6,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 (Please note this repo is a recent creation & I still need to clear publication/NDA agreements for larger projects)
 
 ## Deep Learning Projects  
-1. **MetaData Based Treatment Planning Thesis (Fully Connected Neural Network & Autoencoders)** (100%)
-<details>
-  <summary>Details</summary>
-  This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
-  
-  **NOTE: CANNOT BE PUBLISHED HERE UNTILL SUBMISSION SEP 2020**
-  
-  ~Link to Abstract~
-</details>
- 
-2. [**Brain MRI: 3D Convolutional AutoEncoder & Patient Age Classifier**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (75%)
+1. [**Brain MRI: 3D Convolutional AutoEncoder**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (75%)
 <details>
   <summary>Details</summary>
   This project involves the collection of healthy brain MRI images with various patient ages. The autoencoder compresses the 3D MRI data to a more manageable form for the Age classifier network. (This is due ot the memory limitations of my GPU). The Convolutional classifier then reads the encoded data, to predict the age of the patient, of whom the MRI was taken. The network was written in Pytorch, with CUDA compatability.
@@ -27,13 +17,22 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
 </details>   
  
-3. **Receipt Scanner and Expense Organiser(OCR)** *IN PROGRESS*
+2. **Satilite Image, location prediction via 2D classification** *IN PROGRESS*
 <details>
   <summary>Details</summary>
-  The concept behind this project is to implement a OCR for the purposes of reading pictures of reciepts, and extracting the name and price of each item. This would then be tabulated and the items placed into catagories. Giving the user an overview of where and how money is being spent, which items are candidates for bulk buying, etc. Idealy this project would be integrated into an app in a later development stage. 
+  TO BE FILLED
   
 </details>  
 
+3. **Masters Thesis - MetaData Based Treatment Planning via Fully Connected Neural Network** (100%)
+<details>
+  <summary>Details</summary>
+  This Projects purpose was to create a fully connected neural network to predict treatment sucess based on patient metadata and the respecitive treatment plan that was implemented. Additionaly this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data aquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
+  
+  **NOTE: Currently being refined for publication, therefore will not be uploaded until then**
+  
+  [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
+</details>
 
 ## Python Mini Projects
 1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)  (100%)
