@@ -6,7 +6,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 (Please note this repo is a recent creation & I still need to clear publication/NDA agreements for larger projects)
 
 ## Deep Learning Projects  
-1. [**Brain MRI: 3D Convolutional AutoEncoder**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (75%)
+1. [**Brain MRI: 3D Convolutional AutoEncoder**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (100%)
 <details>
   <summary>Details</summary>
   This project involves the collection of healthy brain MRI images with various patient ages. The autoencoder compresses the 3D MRI data to a more manageable form for the Age classifier network. (This is due ot the memory limitations of my GPU). The Convolutional classifier then reads the encoded data, to predict the age of the patient, of whom the MRI was taken. The network was written in Pytorch, with CUDA compatability.
@@ -17,7 +17,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
 </details>   
  
-2. **Satilite Image, location prediction via 2D classification** *IN PROGRESS*
+2. [**Satilite Image, location prediction via 2D classification**] (https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
 <details>
   <summary>Details</summary>
   TO BE FILLED
