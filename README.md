@@ -17,7 +17,7 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
 </details>   
  
-2. [**Satilite Image, location prediction via 2D classification**] (https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
+2. [**Satilite Image, location prediction via 2D classification**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
 <details>
   <summary>Details</summary>
   TO BE FILLED
