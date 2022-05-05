@@ -33,25 +33,6 @@ Sneak Peeks will be shown here, with relevent information/visuals.
   
   [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
 </details>
- 
-2. [**Brain MRI: 3D Convolutional AutoEncoder & Patient Age Classifier**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (75%)
-<details>
-  <summary>Details</summary>
-  This project involves the collection of healthy brain MRI images with various patient ages. The autoencoder compresses the 3D MRI data to a more manageable form for the Age classifier network. (This is due ot the memory limitations of my GPU). The Convolutional classifier then reads the encoded data, to predict the age of the patient, of whom the MRI was taken. The network was written in Pytorch, with CUDA compatability.
-  
-  The data aquired from: https://www.insight-journal.org/midas/community/view/21
-  
-  ![Preview](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/BRAIN%20MRI/README/gif2.gif)  
-  
-</details>   
- 
-3. **Receipt Scanner and Expense Organiser(OCR)** *IN PROGRESS*
-<details>
-  <summary>Details</summary>
-  The concept behind this project is to implement a OCR for the purposes of reading pictures of reciepts, and extracting the name and price of each item. This would then be tabulated and the items placed into catagories. Giving the user an overview of where and how money is being spent, which items are candidates for bulk buying, etc. Idealy this project would be integrated into an app in a later development stage. 
-  
-</details>  
-
 
 ## Python Mini Projects
 1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)  (100%)
