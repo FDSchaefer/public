@@ -3,13 +3,15 @@ Welcome, I hope to always add new projects, all work is done myself unless speci
 All projects are organised by language, then in individual project folders (If Uploaded).
 Sneak Peeks will be shown here, with relevent information/visuals.
 
-(Please note this repo is a recent creation & I still need to clear publication/NDA agreements for larger projects)
-
 ## Deep Learning Projects  
 1. [**Brain MRI: 3D Convolutional AutoEncoder**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/BRAIN%20MRI) (100%)
 <details>
   <summary>Details</summary>
-  This project involves the collection of healthy brain MRI images with various patient ages. The autoencoder compresses the 3D MRI data to a more manageable form for the Age classifier network. (This is due ot the memory limitations of my GPU). The Convolutional classifier then reads the encoded data, to predict the age of the patient, of whom the MRI was taken. The network was written in Pytorch, with CUDA compatability.
+  This project involves the cration of an autoencoder to process 3D brain MRI data via 3 3D convolutions, for a total compression of circa 60%.
+  
+  It is not uncommen that one of the main limitations of machine learning models is the inability of the host system to handle the large datasets, or the network getting overwhemed by the number of features. An autoencoder, allows us to use machine learning to compress the image down to a manageable size while maintaining the core feature information which would be needed in future modeling steps.
+  
+  The network was written in Pytorch, with CUDA compatability using raw python scripts.
   
   The data aquired from: https://www.insight-journal.org/midas/community/view/21
   
@@ -20,7 +22,13 @@ Sneak Peeks will be shown here, with relevent information/visuals.
 2. [**Satilite Image, location prediction via 2D classification**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
 <details>
   <summary>Details</summary>
-  TO BE FILLED
+  With the USA being a large and diverse country in terms of landscapes and enviornments, it is not unreasonable to assume one could identify states from satilite photograpthy. Inspired by games like Geo-Guesser, where the classification is done by humans, i wanted to to experiment to see if this would be possible via a neural network. 
+  
+  I aquired data from 4 US States, (California-CA, Maine-ME, New Mexico-NM and Florida-FL) via the [USGS Earth Explorer](https://earthexplorer.usgs.gov). By collecting a sample 50 images from each state we ensured a general overview with some variation in landscape and even cityscapes. As the files were encoded in the .jp2 format there was a significant effort to parse the information into more accesable forms, additionaly to ensure enough data for training i decided that each HD satilite image (13200x12000x4) would be sampled 20 times (128x128x4) using a random non-repeating sampling algorithm. We additionaly set aside 15% of the full size images to keep as final unseen testing data, which were then sampled and stored seperatly. 
+  
+  The training and validation sets were split via straitifed random sampling at 30% used for validation. We also implemented a mild dropout and some basic data augmentation within the network to avoid overfitting. After 200 epochs of training we found a very acceptable training and validation accuracy of: 98.7% and 98.3%, with the unseen testing set being predicted with 96% accuracy. Showing that our network was generaly applicable for these states.
+  
+  Some next steps would be to use the pretrained model to introduce a 5th class, and observe if it would be able to distinguish and mantain its previous training. 
   
 </details>  
 
