@@ -12,12 +12,20 @@ import numpy as np
 from medpy.io import load
 import scipy.ndimage as img
 import matplotlib.pyplot as plt
+import pandas as pd
+
+
 
 ## DIRECTORIES ###
 root = os.getcwd()
 dataDir = root+'/data'
 processedDir = root+'/processed'
 
+## Metadata Extract ##
+METAdataP   = pd.read_csv('D:\Documents\Mini Projects\public\Deep Learning\BRAIN MRI\processed\meta.csv')
+METAdata    = pd.DataFrame.to_numpy(METAdataP)
+ageList     = METAdata[:,1].astype(int)
+np.save(processedDir + '/AgeClass', ageList)
 
 
 #Input Shape for Network
@@ -34,6 +42,7 @@ if loadData:
 
         if 'mha' in name :
             print('Working on: ' + name)
+
             imageOut, image_header = load(dataDir + '/' + name)
             curShape = np.asarray(imageOut.shape)
 

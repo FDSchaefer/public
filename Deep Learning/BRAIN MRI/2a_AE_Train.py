@@ -218,6 +218,8 @@ if SAVE == 'Y' or SAVE == 'y':
     torch.save(model, SaveDir + NAME +'\ModelSave.npy')
     np.save(SaveDir + NAME +'/TrainingHistory', [LTmean1, LTstd1, LTmean2, LTstd2, LVmean1, LVstd1, LVmean2, LVstd2])
 
+
+
 ### SAVE MODEL OUTPUTS FOR LATER ANALYIS ###
 model = model.load_state_dict(torch.load(SaveDir + NAME +'//Best.pth'))
 
