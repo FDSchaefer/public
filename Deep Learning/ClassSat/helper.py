@@ -1,5 +1,5 @@
-import rasterio
-from rasterio.plot import reshape_as_raster, reshape_as_image
+from rasterio import open
+from rasterio.plot import reshape_as_image
 import h5py
 from tqdm.auto import tqdm
 
@@ -9,7 +9,7 @@ from PIL import Image
 
 
 def extractImage(source,jp2,target = None,pix = 1024):
-    f = rasterio.open(source + jp2)  #Open Image
+    f = open(source + jp2)  #Open Image
     CMYK = np.uint8(reshape_as_image(f.read())) #Convert to standard image format
     I = Image.fromarray(CMYK).resize((pix, pix))
     if target != None:
