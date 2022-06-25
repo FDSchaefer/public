@@ -78,11 +78,4 @@ Sneak Peeks will be shown here, with relevant information/visuals.
 </details>
 
 
-## C++ 
-Too Be added Soon
-
-## Unity (C#)
-Too Be added Soon
-
-
 
