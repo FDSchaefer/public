@@ -45,7 +45,7 @@ Sneak Peeks will be shown here, with relevant information/visuals.
   
   **NOTE: Currently being refined for publication, therefore code will not be uploaded until then**
   
-  [Link 2 Thesis](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Thesis%20Report%20-%20Franz%20Schaefer.pdf)
+  [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
 </details>
 
 ## Python Mini Projects
