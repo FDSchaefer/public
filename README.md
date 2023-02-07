@@ -43,7 +43,7 @@ Sneak Peeks will be shown here, with relevant information/visuals.
   <summary>Details</summary>
   This Projects purpose was to create a fully connected neural network to predict treatment success based on patient metadata and the respective treatment plan that was implemented. Additionally this model was used to optimise treatments by implementing the network into the existing planning software *MatRad*. The project involved full data acquisition, extraction, standardisation, autoencoding and final model creation and subsequent integration.  
   
-  **NOTE: Currently being refined for publication, therefore will not be uploaded until then**
+  **NOTE: Currently being refined for publication, therefore code will not be uploaded until then**
   
   [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
 </details>
