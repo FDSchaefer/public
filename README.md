@@ -49,7 +49,16 @@ Sneak Peeks will be shown here, with relevant information/visuals.
 </details>
 
 ## Python Mini Projects
-1. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)  (100%)
+1. [**Data Science Basics**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/RegressionMethods)  (70%)
+<details>
+  <summary>Details</summary>
+  In this project I wanted to create a way to quickly and easily show the basics of data science, using an open source regression data set. The data used for this project can be found here: TEMP LINK
+  
+  There are 3 notebooks, calling on a unified class for the various functions executed. The notebooks are specialised: 1 - Visualisation, 2 - Clustering, 3 - Engineering and 4 - Modeling, while it is not nessary to execute them in that order, the concepts that the latter may draw apon are explained better in the previous Notebooks.  
+
+</details>
+
+2. [**Boid Flocking Sim**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/FlockingSim)  (100%)
 <details>
   <summary>Details</summary>
   This project involved the implementation of a simple Boid Flocking simulation, using the 3 laws. Additional GUI additions were added to allow the user to play around with the simulation, including sliders, buttons and menus for all relevant options. 
@@ -58,7 +67,7 @@ Sneak Peeks will be shown here, with relevant information/visuals.
   
 </details>
 
-2. [**Dynamic Textures, Via Random Noise**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/DynamicNoise)  (100%)
+3. [**Dynamic Textures, Via Random Noise**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/DynamicNoise)  (100%)
 <details>
   <summary>Details</summary>
   This project worked on creating dynamic textures via random noise, by layering different noise densities in different ways, to allow for a fast yet always unique experience. Works well as a screensaver/background or animated poster. 
