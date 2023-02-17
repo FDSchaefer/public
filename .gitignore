@@ -18,3 +18,4 @@ Python Projects/Crypto/SimpleStorageContract.sol
 Python Projects/Crypto/main.py
 Python Projects/Crypto/deploy_smart_contract_python.py
 Python Projects/Crypto/compiled_code.json
+*.pyc
