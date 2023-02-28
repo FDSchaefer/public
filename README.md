@@ -49,7 +49,7 @@ Sneak Peeks will be shown here, with relevant information/visuals.
 </details>
 
 ## Python Mini Projects
-1. [**Data Science Basics**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/RegressionMethods)  (70%)
+1. [**Data Science Basics**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/RegressionMethods)  (50% - Ongoing)
 <details>
   <summary>Details</summary>
   In this project I wanted to create a way to quickly and easily show the basics of data science, using an open source regression data set. The data used for this project can be found here: TEMP LINK
