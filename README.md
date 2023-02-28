@@ -52,7 +52,9 @@ Sneak Peeks will be shown here, with relevant information/visuals.
 1. [**Data Science Basics**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/RegressionMethods)  (50% - Ongoing)
 <details>
   <summary>Details</summary>
-  In this project I wanted to create a way to quickly and easily show the basics of data science, using an open source regression data set. The data used for this project can be found here: TEMP LINK
+  In this project I wanted to create a way to quickly and easily show the basics of data science, using an open source regression data set. The data used for this project can be found here:
+  
+  [Source](https://archive.ics.uci.edu/ml/datasets/wine+quality)
   
   There are 3 notebooks, calling on a unified class for the various functions executed. The notebooks are specialised: 1 - Visualisation, 2 - Clustering, 3 - Engineering and 4 - Modeling, while it is not nessary to execute them in that order, the concepts that the latter may draw apon are explained better in the previous Notebooks.  
 
