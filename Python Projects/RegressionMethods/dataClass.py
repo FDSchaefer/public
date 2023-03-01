@@ -89,13 +89,13 @@ class dataMethods():
 
 ## dataMethods Plotting Functions 
 
-def tileHistogram(data):
+def tileHistogram(data,hue = "type"):
     # Histograms of all core features 
     fig,ax = plt.subplots(4,3, figsize=(15, 15))
 
     i,j = 0,0
     for feature in data.columns[:-1]:
-        sns.histplot(data = data, x = feature, hue= "type", ax = ax[i,j],stat= "count", kde=True)
+        sns.histplot(data = data, x = feature, hue= hue, ax = ax[i,j],stat= "count", kde=True)
         if j < 2:
             j += 1
         else:
@@ -117,3 +117,8 @@ def correlationPlot(data):
     sns.heatmap(corr_join, annot=True, ax = ax[2],cmap='coolwarm')
     ax[2].set_title("Feature Correlations - All Wine")
     fig.tight_layout()
+
+def centreHeatmap(data,model):
+    fig,ax = plt.subplots()
+    sns.heatmap(pd.DataFrame(model.cluster_centers_,columns = data.columns), xticklabels=1,ax = ax)
+    ax.set(xlabel='Features', ylabel='Cluster')
