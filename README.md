@@ -48,6 +48,15 @@ Sneak Peeks will be shown here, with relevant information/visuals.
   [Link 2 Abstract](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/Treatment%20Planning/Abstract.pdf)
 </details>
 
+
+3. **Crypto Pipeline - Automatic Data Pipeline and Price Forecasting** (100%)
+<details>
+  <summary>Details</summary>
+  This project was a fun experiment to implment a timescaleDB database by using the public Binance API. 
+  We Then extract some basic features regarding price behaviour, and use tensorflow to forecast price movements in the next 24h
+  As expected from a pure technical analys aproch, sucess is limited, however the project was helpful in understanding API usage and model pipelines
+</details>
+
 ## Python Mini Projects
 1. [**Data Science Basics**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/RegressionMethods)  (50% - Ongoing)
 <details>
