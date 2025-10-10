@@ -89,20 +89,20 @@ class dataMethods():
 
 ## dataMethods Plotting Functions 
 
-def tileHistogram(data):
+def plot_tileHistogram(data,hue = "type"):
     # Histograms of all core features 
     fig,ax = plt.subplots(4,3, figsize=(15, 15))
 
     i,j = 0,0
     for feature in data.columns[:-1]:
-        sns.histplot(data = data, x = feature, hue= "type", ax = ax[i,j],stat= "count", kde=True)
+        sns.histplot(data = data, x = feature, hue= hue, ax = ax[i,j],stat= "count", kde=True)
         if j < 2:
             j += 1
         else:
             j = 0
             i += 1
 
-def correlationPlot(data):
+def plot_correlationPlot(data):
     ## Correlation Matrix of all core features (red and white wine)
     fig,ax = plt.subplots(3,1, figsize=(10,20))
 
@@ -117,3 +117,22 @@ def correlationPlot(data):
     sns.heatmap(corr_join, annot=True, ax = ax[2],cmap='coolwarm')
     ax[2].set_title("Feature Correlations - All Wine")
     fig.tight_layout()
+
+def plot_centreHeatmap(data,model):
+    fig,ax = plt.subplots()
+    sns.heatmap(pd.DataFrame(model.cluster_centers_,columns = data.columns), xticklabels=1,ax = ax)
+    ax.set(xlabel='Features', ylabel='Cluster')
+
+def plot_Cluster3D(data,labels):
+
+    import plotly.graph_objects as go
+    from sklearn.decomposition import PCA
+
+    pca = PCA(n_components=3).fit(data)
+    data_pca = pca.transform(data)
+
+    Scene = dict(xaxis = dict(title  = 'PC1'),yaxis = dict(title  = 'PC2'),zaxis = dict(title  = 'PC3'))
+    trace = go.Scatter3d(x=data_pca[:,0], y=data_pca[:,1], z=data_pca[:,2], mode='markers',marker=dict(color = labels, colorscale='Viridis', size = 10, line = dict(color = 'gray',width = 5)))
+    layout = go.Layout(margin=dict(l=0,r=0),scene = Scene, height = 750,width = 750)
+    fig = go.Figure(data = [trace], layout = layout)
+    fig.show()
