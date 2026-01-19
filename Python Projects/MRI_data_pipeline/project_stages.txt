@@ -1,0 +1,27 @@
+Stage 1: Core Pipeline
+
+Setup project structure
+Implement data loading/validation (utils.py)
+Implement normalization and smoothing (preprocessing.py)
+
+Stage 2: Registration
+
+Download MNI152 atlas
+Implement SimpleITK-based registration (registration.py)
+Apply transformed mask to extract brain
+
+Stage 3: CLI & Integration
+
+Create command-line interface with argparse
+Add logging throughout pipeline
+Error handling for edge cases
+
+Stage 4: Docker Integration 
+
+Host pipline in Docker
+Create production style usecase
+
+Stage 5: Testing & Documentation
+
+Write unit tests for key functions
+Create README with project description and user guide

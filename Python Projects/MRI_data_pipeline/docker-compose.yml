@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  skull-stripper:
+    build: .
+    volumes:
+      - ./data/input:/app/data/input
+      - ./data/output:/app/data/output
+      - ./docker_config.json:/app/data/config/config.json:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: '--watch'
+    restart: unless-stopped

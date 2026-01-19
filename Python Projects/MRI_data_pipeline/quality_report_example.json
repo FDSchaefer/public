@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "report_version": "1.0",
+    "generated_at": "2025-11-18T22:26:53.462119",
+    "filename": "./data/sample_data/processed/skull_stripped_final.nii"
+  },
+  "summary": {
+    "overall_status": "PASS",
+    "checks_passed": 5,
+    "total_checks": 5
+  },
+  "metrics": {
+    "mask_coverage": {
+      "value": 14.99,
+      "unit": "percent",
+      "status": "PASS",
+      "threshold": "5.0 < value < 40.0",
+      "description": "Percentage of non-zero voxels"
+    },
+    "brain_volume": {
+      "value": 1797.46,
+      "unit": "cm3",
+      "status": "PASS",
+      "threshold": "800 < value < 2000",
+      "description": "Estimated brain volume"
+    },
+    "connected_components": {
+      "count": 1,
+      "largest_component_fraction": 1.0,
+      "largest_component_size": 1886626,
+      "status": "PASS",
+      "threshold": "count == 1",
+      "description": "Number of disconnected brain regions"
+    },
+    "edge_density": {
+      "value": 2.8945,
+      "unit": "arbitrary",
+      "status": "PASS",
+      "threshold": "value < 50.0",
+      "description": "Average edge magnitude at brain boundary"
+    },
+    "intensity_statistics": {
+      "mean": 0.23,
+      "std": 0.08,
+      "min": 0.03,
+      "max": 0.65,
+      "median": 0.23,
+      "q25": 0.18,
+      "q75": 0.28,
+      "status": "PASS",
+      "threshold": "std > 0.01",
+      "description": "Brain region intensity distribution"
+    }
+  }
+}
