@@ -18,24 +18,60 @@ Sneak Peeks will be shown here, with relevant information/visuals.
   ![Preview](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/BRAIN%20MRI/README/gif2.gif)  
   
 </details>   
- 
-2. [**Satellite Image, location prediction via 2D classification**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
+
+2. [**MRI Image Processing Pipeline**](https://github.com/FDSchaefer/public/tree/master/Python%20Projects/MRI_data_pipeline) (100%)
 <details>
-  <summary>Details</summary>
-  With the USA being a large and diverse country in terms of landscapes and environments, it is not unreasonable to assume one could identify states from satellite photography. Inspired by games like Geo-Guesser, where the classification is done by humans, i wanted to experiment to see if this would be possible via a neural network. 
+    
+  ## Overview
   
-  ![Preview](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/RandomSelection.jpg)  
+  This project is a production-ready Python pipeline for automated skull stripping of T1-weighted MRI scans using atlas-based registration. This tool implements preprocessing, registration, and quality assessment workflows. With a functional docker deployment, for immidate use in a production context.
   
-  I acquired data from 4 US States, (California-CA, Maine-ME, New Mexico-NM and Florida-FL) via the [USGS Earth Explorer](https://earthexplorer.usgs.gov). By collecting a sample 50 images from each state we ensured a general overview with some variation in landscape and even cityscapes. As the files were encoded in the .jp2 format there was a significant effort to parse the information into more accessible forms, additionally to ensure enough data for training i decided that each HD satellite image (13200x12000x4) would be sampled 20 times (128x128x4) using a random non-repeating sampling algorithm. We additionally set aside 15% of the full size images to keep as final unseen testing data, which were then sampled and stored separately. 
+  **Key Features:**
+  - Atlas-based skull stripping using MNI152 template
+  - Flexible preprocessing (Z-score/min-max normalization, Gaussian smoothing)
+  - Rigid and affine registration options
+  - Automated quality assessment with JSON reports
+  - Interactive and lightweight visualization tools
+  - Complete Docker integration for production deployment
+  - Comprehensive unit tests
+
+  --- 
   
-  ![Training](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/TrainingData.jpg)
+  ## Development Approach
+  I took the approach of building in Proof of Concept Stages (POC_STAGE).
+  This means that I would construct a working version of a submodule, that is able to perform the required tasks to an acceptable level. (This does not mean it can not be returned to at a later date, simply that it can be relied upon when building the next stage.) The Stage is considered complete/passing using a POC_StageX script, that performs functional tests on all expected tasks. (Unlike unit tests, it is expected to have a human review the outputs (imagine functional tests), the [scrollview.py](src/scrollview.py) function is very helpful for this purpose). Once the gateway is passed, the next stage can be worked upon, with bugfixes possible on previous stages as they come up. 
   
-  The training and validation sets were split via stratified random sampling at 30% used for validation. We also implemented a mild dropout and some basic data augmentation within the network to avoid overfitting. After 200 epochs of training we found a very acceptable training and validation accuracy of: 98.7% and 98.3%, with the unseen testing set being predicted with 96% accuracy. Showing that our network was generally applicable for these states.
+  --- 
+  ## Pipeline Implementation
   
-  ![Testing](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/Testing.jpg)
+  **Data flow:**
+  1. Load input MRI (NIFTI/DICOM) and MNI152 atlas
+  2. Normalize intensities (Z-score or min-max)
+  3. Apply Gaussian smoothing (σ=1.0 default)
+  4. Register to atlas space using SimpleITK (rigid/affine)
+  5. Apply brain mask to extract brain region (from preprocessed image or original image)
+  6. Transform result back to original space
+  7. Save skull-stripped output + quality report
+   
+  </details> 
   
-  Some next steps would be to use the pretrained model to introduce a 5th class, and observe if it would be able to distinguish and maintain its previous training. 
-  
+  2. [**Satellite Image, location prediction via 2D classification**](https://github.com/FDSchaefer/public/tree/master/Deep%20Learning/ClassSat) *IN PROGRESS*
+  <details>
+    <summary>Details</summary>
+    With the USA being a large and diverse country in terms of landscapes and environments, it is not unreasonable to assume one could identify states from satellite photography. Inspired by games like Geo-Guesser, where the classification is done by humans, i wanted to experiment to see if this would be possible via a neural network. 
+    
+    ![Preview](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/RandomSelection.jpg)  
+    
+    I acquired data from 4 US States, (California-CA, Maine-ME, New Mexico-NM and Florida-FL) via the [USGS Earth Explorer](https://earthexplorer.usgs.gov). By collecting a sample 50 images from each state we ensured a general overview with some variation in landscape and even cityscapes. As the files were encoded in the .jp2 format there was a significant effort to parse the information into more accessible forms, additionally to ensure enough data for training i decided that each HD satellite image (13200x12000x4) would be sampled 20 times (128x128x4) using a random non-repeating sampling algorithm. We additionally set aside 15% of the full size images to keep as final unseen testing data, which were then sampled and stored separately. 
+    
+    ![Training](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/TrainingData.jpg)
+    
+    The training and validation sets were split via stratified random sampling at 30% used for validation. We also implemented a mild dropout and some basic data augmentation within the network to avoid overfitting. After 200 epochs of training we found a very acceptable training and validation accuracy of: 98.7% and 98.3%, with the unseen testing set being predicted with 96% accuracy. Showing that our network was generally applicable for these states.
+    
+    ![Testing](https://github.com/FDSchaefer/public/blob/master/Deep%20Learning/ClassSat/images/Testing.jpg)
+    
+    Some next steps would be to use the pretrained model to introduce a 5th class, and observe if it would be able to distinguish and maintain its previous training. 
+    
 </details>  
 
 3. **Masters Thesis - Metadata Based Treatment Planning via Fully Connected Neural Network** (100%)
